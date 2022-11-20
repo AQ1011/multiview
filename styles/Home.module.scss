@@ -1,0 +1,23 @@
+$small: 400px;
+$medium: 600px;
+$large: 800px;
+$xlarge: 1200px;
+
+.video-list {
+  width: 100%;
+  display: grid;
+  padding: 1em;
+  gap: 1em;
+  @media screen and (min-width: $small) {
+    grid-template-columns: auto;
+  }
+  @media screen and (min-width: $medium) {
+    grid-template-columns: repeat( 2, 1fr );
+  }
+  @media screen and (min-width: $large) {
+    grid-template-columns: repeat( 3, 1fr );
+  }
+  @media screen and (min-width: $xlarge) {
+    grid-template-columns: repeat( 5, 1fr );
+  }
+}

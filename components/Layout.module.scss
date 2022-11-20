@@ -1,0 +1,34 @@
+@use '../styles/const.scss' as c;
+
+.layout {
+    display: grid;
+    grid-template: 
+        'header header header'
+        'sidebar main main';
+    grid-template-columns: min-content max-content;
+    height: inherit;
+    .header {
+        grid-area: header;
+        position: sticky;
+        top: 0;
+    }
+    .side {
+        height: calc(100vh - c.$header-height);
+        width: 0;
+        grid-area: sidebar;
+        position: sticky;
+        top: c.$header-height;
+        &[data-expand=true] {
+            width: 200px;
+        }
+        &[data-expand=false] {
+            transform: translateX(-200px);
+        }
+        transition: width 0.3s ease-out, transform 0.3s ease-out;
+    }
+    .main {
+        width: 100%;
+        grid-area: main;
+        // flex-grow: 1;
+    }
+}
