@@ -29,6 +29,7 @@
     .main {
         width: 100%;
         grid-area: main;
+        overflow: hidden;
         // flex-grow: 1;
     }
 }

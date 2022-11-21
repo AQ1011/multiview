@@ -1,5 +1,5 @@
 import { NextComponentType } from "next";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Header from "./Header/Header";
 import SideMenu from "./SideMenu/SideMenu";
 import styles from './Layout.module.scss';
@@ -7,9 +7,11 @@ import styles from './Layout.module.scss';
 export default function Layout({ children }) {
     const headerHeight = '60px';
     const [expand, setExpand] = useState(true);
+    // const page = useRef<HTMLDivElement>(null);
     const menu = () => {
         setExpand(() => !expand);
     }
+
     return (
         <div>
             <div className={styles.layout}>

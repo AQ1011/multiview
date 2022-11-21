@@ -1,24 +1,27 @@
 import { NextPage } from 'next'
-import React, { ReactElement, useEffect, useRef, useState } from 'react'
-import Header from '../components/Header/Header'
-import Layout from '../components/Layout'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import VideoItem from '../components/VideoItem/VideoItem'
 import styles from '../styles/Home.module.scss'
 import { NextPageWithLayout } from './_app'
 
 const Home: NextPageWithLayout = () => {
 
-  const [input, setInput] = useState('');
-  const [list, setList] = useState([0]);
-  const listElement = useRef<HTMLDivElement>(null);
+  const [list, setList] = useState<number[]>([]);
+  const loadElement = useRef<HTMLDivElement>(null);
+  const [isInViewPort, setIsInViewPort] = useState(false);
+  const observer = useRef<IntersectionObserver>();
   useEffect(() => {
-    window.addEventListener('scroll', (e) => {
-      if(listElement.current){
-        console.log(listElement.current);
-        console.log(window.innerHeight, 
-          listElement.current.scrollTop);
-      }
-    });
+    if (loadElement.current && observer.current)
+      observer.current.observe(loadElement.current);
+
+    return () => {
+      if (observer.current)
+        observer.current.disconnect();
+    };
+  }, [loadElement, observer]);
+
+  useEffect(() => {
+    observer.current = new IntersectionObserver(([entry]) => setIsInViewPort(entry.isIntersecting));
     let n = 0;
     let list = [];
     while (n < 25) {
@@ -27,20 +30,34 @@ const Home: NextPageWithLayout = () => {
     }
     setList([...list]);
   }, [])
-  const search = () => {
-    if(input) {
-      alert(input);
+
+  useEffect(() => {
+    if(isInViewPort) {
+      let n = list.length;
+      let listTemp: number[] = [];
+      while (n < list.length + 25) {
+        listTemp.push(n);
+        n++;
+      }
+      setList((list) => [...list, ...listTemp]);
+      console.log(list);
     }
-  }
+  }, [isInViewPort])
+
   return (
-    <div>
-      <div className={styles['video-list']} ref={listElement}>
-        {list.map((n)=> <VideoItem key={n}></VideoItem>)}
+    <>
+      <div className={styles['video-list']}>
+        {list.map((n)=>
+              <VideoItem key={n}></VideoItem>
+        )}
       </div>
-      
-    </div>
+      <div ref={loadElement} className={styles.loader}></div>
+    </>
   )
 }
+
+
+export default Home
 
 // Home.getLayout = function getLayout(page: ReactElement) {
 //   return (
@@ -49,5 +66,3 @@ const Home: NextPageWithLayout = () => {
 //     </Layout>
 //   )
 // }
-
-export default Home
