@@ -1,16 +1,18 @@
 @use '../styles/const.scss' as c;
 
 .layout {
+    // max-width: 100vw;
     display: grid;
     grid-template: 
         'header header header'
         'sidebar main main';
-    grid-template-columns: min-content max-content;
+    grid-template-columns: min-content min-content;
     height: inherit;
     .header {
         grid-area: header;
         position: sticky;
         top: 0;
+        z-index: 100;
     }
     .side {
         height: calc(100vh - c.$header-height);
@@ -29,7 +31,6 @@
     .main {
         width: 100%;
         grid-area: main;
-        overflow: hidden;
         // flex-grow: 1;
     }
 }

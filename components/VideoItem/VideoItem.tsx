@@ -1,16 +1,25 @@
-import { NextComponentType } from "next";
+import { NextComponentType, NextPageContext } from "next";
+import { BaseContext } from "next/dist/shared/lib/utils";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import Video from "../../models/videos.interface";
 import styles from './VideoItem.module.scss';
 
-const VideoItem: NextComponentType = () => {
+const VideoItem: NextComponentType<BaseContext,{},Video> = ({id, snippet}) => {
+    // let title = snippet.title;
+    // if(title.length > 60) {
+    //     title = title.substring(0, 80) + '...';
+    // }
     return (
         <div className={styles.container}>
-            <div className={styles.thumbnail}>
-                <Image src='' alt="thumbnail" objectFit="fill" placeholder="empty"></Image>
+            <div className={styles.thumbnail} data-live={snippet.liveBroadcastContent.localeCompare('live')}>
+                <Image src={snippet.thumbnails.medium.url} alt={snippet.title} 
+                    objectFit="cover" layout="fill" placeholder="empty">
+                </Image>
             </div>
             <div className={styles.details}>
-                <div className={styles.title}>Title</div>
-                <div className={styles.channel}>Channel name</div>
+                <div className={styles.title}>{snippet.title}</div>
+                <div className={styles.channel}>{snippet.channelTitle}</div>
             </div>
         </div>
     )

@@ -1,8 +1,8 @@
 @use './colors.scss' as color;
 
 $small: 400px;
-$medium: 600px;
-$large: 800px;
+$medium: 700px;
+$large: 1000px;
 $xlarge: 1200px;
 
 .video-list {
@@ -17,7 +17,7 @@ $xlarge: 1200px;
     grid-template-columns: repeat( 2, 1fr );
   }
   @media screen and (min-width: $large) {
-    grid-template-columns: repeat( 3, 1fr );
+    grid-template-columns: repeat( 4, 1fr );
   }
   @media screen and (min-width: $xlarge) {
     grid-template-columns: repeat( 5, 1fr );
