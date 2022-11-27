@@ -30,4 +30,9 @@ button {
     &[data-shape="icon"] {
         padding: 6px 20px;
     }
+    &[data-shape="none"] {
+        aspect-ratio: 1; 
+        padding: 6px;
+        border: none;
+    }
 }

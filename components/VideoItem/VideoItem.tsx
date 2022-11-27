@@ -3,10 +3,10 @@ import { BaseContext } from "next/dist/shared/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Video from "../../models/videos.interface";
+import Item from "../../models/item.interface";
 import styles from './VideoItem.module.scss';
 
-const VideoItem: NextComponentType<BaseContext,{},Video> = ({id, snippet}) => {
+const VideoItem: NextComponentType<BaseContext,{},Item> = ({id, snippet}) => {
     // let title = snippet.title;
     // if(title.length > 60) {
     //     title = title.substring(0, 80) + '...';

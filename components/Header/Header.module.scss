@@ -1,6 +1,12 @@
 @use '../../styles/colors.scss' as color;
 @use '../../styles/const.scss' as c;
 
+.logo {
+    cursor: pointer;
+    font-weight: bold;
+    user-select: none;
+}
+
 .list {
     display: flex;
     gap: 16px;
@@ -49,6 +55,9 @@
     }
     button {
         background: color.$primary-teritary !important;
+    }
+    &:focus-within {
+        outline: 1px solid color.$outline
     }
 }
 .hide {

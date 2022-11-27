@@ -1,7 +1,7 @@
 @use './colors.scss' as color;
 
 $small: 400px;
-$medium: 700px;
+$medium: 600px;
 $large: 1000px;
 $xlarge: 1200px;
 
@@ -22,9 +22,21 @@ $xlarge: 1200px;
   @media screen and (min-width: $xlarge) {
     grid-template-columns: repeat( 5, 1fr );
   }
-}
-
-.loader {
-  height: 300px;
-  background: color.$surface-5;
+  .skeleton {
+    height: 15em;
+    width: 100%;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    .thumbnail {
+      height: 70%;
+      background: color.$surface-1;
+      border-radius: 0.5em;
+    }
+    .text {
+      margin-top: 0.5em;
+      border-radius: 900px;
+      height: 0.6em;
+      background: color.$surface-1;
+    }
+  }
 }

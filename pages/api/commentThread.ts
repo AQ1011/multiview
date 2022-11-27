@@ -10,15 +10,14 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-    fetch('https://www.googleapis.com/youtube/v3/videos?'
+    console.log(req.query['videoId'],123123);
+    fetch('https://www.googleapis.com/youtube/v3/commentThreads?'
     + new URLSearchParams({
-        part: 'snippet',
-        // eventType: 'live',
+        videoId: req.query['videoId'] as string,
+        part: 'snippet,replies',
+        eventType: 'live',
+        order: 'relevance',
         maxResults: '20',
-        // q: 'hololive',
-        // type: 'video',
-        chart: 'mostPopular',
-        pageToken: req.query['nextPageToken'] as string ?? "",
         key: process.env.API_KEY!
     }))
     .then(response => {
@@ -33,7 +32,6 @@ export default function handler(
     })
     .catch(err => {
         res.status(500).json({success: false})
-        console.log(err);
         resolve();
     })
 }

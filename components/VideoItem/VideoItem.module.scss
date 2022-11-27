@@ -7,6 +7,7 @@
     padding: 8px;
     display: grid;
     grid-template-rows: 70% minmax(2em,30%);
+    cursor: pointer;
     &:hover {
         // outline: 1px solid $outline;
         border-radius: 0.5rem;

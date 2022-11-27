@@ -1,6 +1,6 @@
-import Video from "./videos.interface";
+import Item from "./item.interface";
 
-export interface YtResponse {
+export interface YtResponse<T> {
     kind: string;
     etag: string,
     nextPageToken: string;
@@ -9,5 +9,5 @@ export interface YtResponse {
         totalResults: number;
         resultsPerPage: number; 
     };
-    items: Video[]
+    items: Item<T>[]
 }

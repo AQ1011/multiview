@@ -11,12 +11,19 @@ const SideMenu: NextComponentType<BaseContext,{},props> = (props) => {
         <div className={styles.container}>
             <ul>
                 <li className={styles.active}>
-                    <Link href='/video1'>
-                        Menu 1
+                    <span className="material-symbols-outlined">show_chart</span>
+                    <Link href='/'>
+                       Popular
                     </Link>
                 </li>
-                <li>Menu 1</li>
-                <li>Menu 1</li>
+                <li>
+                    <span className="material-symbols-outlined">history</span>
+                    History
+                </li>
+                <li>
+                    <span className="material-symbols-outlined">list</span>
+                    Playlist
+                </li>
             </ul>
         </div>
     )
