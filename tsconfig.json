@@ -13,8 +13,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "typeRoots": ["./types"],
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Layout.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Layout.jsx", "pages/api/auth/[...nextauth].js"],
   "exclude": ["node_modules"]
 }

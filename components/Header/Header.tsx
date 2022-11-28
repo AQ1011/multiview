@@ -1,9 +1,12 @@
-import { NextComponentType } from "next";
-import { BaseContext } from "next/dist/shared/lib/utils";
-import Head from "next/head";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
 import styles from "./Header.module.scss";
+import { signOut } from "next-auth/react"
 
-const Header: NextComponentType<BaseContext, {}, {menu: () => void}> = ({menu}) => {
+const Header= ({menu} : {menu: any}) => {
+    const { data: session, status } = useSession();
+
     return(
         <header className={styles.header}>
             <div className={styles.part}>
@@ -12,7 +15,7 @@ const Header: NextComponentType<BaseContext, {}, {menu: () => void}> = ({menu}) 
                     onClick={menu}>
                     menu
                 </span>
-                <span className={styles.logo}>HelloWorld</span>
+                <span className={styles.logo}>Multi-Play-er</span>
             </div>
             <div className={styles.search}>
                 <input/>
@@ -23,11 +26,30 @@ const Header: NextComponentType<BaseContext, {}, {menu: () => void}> = ({menu}) 
                 </button>
             </div>
             <div className={`${styles.part} ${styles.hide}`}>
-            <button color="outline" data-shape='none'>
-                <span className="material-symbols-rounded">
-                  person
-                </span>
-            </button>
+            {
+                status === 'authenticated' && session
+                ? 
+                // <button color="outline" data-shape='none'>
+                //     <Link href='/api/auth/signout'>
+                //         <span className="material-symbols-rounded">
+                //         logout
+                //         </span>
+                //     </Link>
+                // </button> 
+                <div className={styles['user-image']} onClick={() => signOut()}>
+                    <Image src={session!.user?.image as string} alt={session!.user?.name as string}
+                        layout='fill'>
+                    </Image>
+                </div>
+                :
+                <button color="outline" data-shape='none'>
+                    <Link href='/api/auth/signin'>
+                        <span className="material-symbols-rounded">
+                        person
+                        </span>
+                    </Link>
+                </button>
+            }
             {/* <button color="outline" data-shape='none'>
                 <span className="material-symbols-rounded">
                   settings

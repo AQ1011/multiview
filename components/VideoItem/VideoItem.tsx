@@ -3,16 +3,16 @@ import { BaseContext } from "next/dist/shared/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Item from "../../models/item.interface";
+import Item, { VideoSnippet } from "../../models/item.interface";
 import styles from './VideoItem.module.scss';
 
-const VideoItem: NextComponentType<BaseContext,{},Item> = ({id, snippet}) => {
+const VideoItem = ({id, snippet}: Item<VideoSnippet>) => {
     // let title = snippet.title;
     // if(title.length > 60) {
     //     title = title.substring(0, 80) + '...';
     // }
     return (
-        <Link href={`/video/${id.videoId}`}>
+        <Link href={`/video/${(id as any).videoId}`}>
             <div className={styles.container}>
                 <div className={styles.thumbnail} data-live={snippet.liveBroadcastContent.localeCompare('live')}>
                     <Image src={snippet.thumbnails.medium.url} alt={snippet.title} 

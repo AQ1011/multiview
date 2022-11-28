@@ -24,7 +24,7 @@ const Home: NextPageWithLayout = () => {
     };
   }, [loadElement, observer]);
 
-  function fetchPage(signal: AbortSignal,nextPage?: string) {
+  function fetchPage(signal: AbortSignal, nextPage?: string) {
     try {
       fetch(`/api/home?` + new URLSearchParams({
         nextPageToken: nextPage ?? ''
@@ -54,7 +54,7 @@ const Home: NextPageWithLayout = () => {
     if(isInViewPort) {
       const controller = new AbortController();
       fetchPage(controller.signal, nextPageToken);
-      return () => controller.abort();
+      // return () => controller.abort();
     }
   }, [isInViewPort])
 

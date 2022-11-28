@@ -65,3 +65,15 @@
         display: none;
     }
 }
+.user-image {
+    position: relative;
+    height: 2em;
+    aspect-ratio: 1;
+    border-radius: 999px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: scale 0.3s ease;
+    &:hover {
+        scale: 1.2;
+    }
+}
