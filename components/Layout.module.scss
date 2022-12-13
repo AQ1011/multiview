@@ -1,4 +1,6 @@
 @use '../styles/const.scss' as c;
+@use '../styles/colors.scss' as color;
+
 
 .layout {
     // max-width: 100vw;
@@ -20,6 +22,7 @@
         grid-area: sidebar;
         position: sticky;
         top: c.$header-height;
+        background: color.$surface;
         &[data-expand=true] {
             width: 200px;
         }

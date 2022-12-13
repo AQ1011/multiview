@@ -1,5 +1,5 @@
 import { NextComponentType } from "next";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Item, { VideoSnippet } from "../../models/item.interface";
@@ -22,7 +22,11 @@ const SideMenu: NextComponentType = (props) => {
                 })
             }).then(res => res.json())
             .then((data: YtResponse<VideoSnippet>) => {
+                console.log(data);
                 setSubs([...data.items]);
+            })
+            .catch(() => {
+                signOut();
             })
         }
     }, [status])

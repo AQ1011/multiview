@@ -12,7 +12,7 @@ const VideoItem = ({id, snippet}: Item<VideoSnippet>) => {
     //     title = title.substring(0, 80) + '...';
     // }
     return (
-        <Link href={`/video/${(id as any).videoId}`}>
+        <Link href={`/video/${id}`}>
             <div className={styles.container}>
                 <div className={styles.thumbnail} data-live={snippet.liveBroadcastContent.localeCompare('live')}>
                     <Image src={snippet.thumbnails.medium.url} alt={snippet.title} 
