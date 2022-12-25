@@ -1,12 +1,30 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
-  name: string
+
 }
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) {
-  res.status(200).json({ name: 'John Doe' })
+    try {
+        let response = await fetch('https://www.googleapis.com/youtube/v3/search?'
+        + new URLSearchParams({
+            part: 'snippet',
+            maxResults: '20',
+            q: req.query['q'] as string,
+            // pageToken: req.query['nextPageToken'] as string ?? "",
+            key: process.env.API_KEY!
+        }));
+        
+        if(response.ok) {
+            let data = await response.json();
+            res.status(200).send(data);
+        } else {
+            throw new Error('Network error');
+        }
+    } catch (err) {
+        res.status(500).send({success: false});
+    }
 }

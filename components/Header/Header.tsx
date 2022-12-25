@@ -3,9 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./Header.module.scss";
 import { signOut } from "next-auth/react"
+import { atom, useAtom } from "jotai";
+import { searchQueryAtom } from "../../store/store";
+import { debounce } from "lodash";
 
 const Header= ({menu} : {menu: any}) => {
     const { data: session, status } = useSession();
+    const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
+    function changeSearch(e: any) {
+        setSearchQuery(e.target.value);
+    }
 
     return(
         <header className={styles.header}>
@@ -18,7 +25,7 @@ const Header= ({menu} : {menu: any}) => {
                 <span className={styles.logo}>Multi-Play-er</span>
             </div>
             <div className={styles.search}>
-                <input/>
+                <input onChange={(e) => changeSearch(e)}/>
                 <button data-shape="icon">
                     <span className="material-symbols-outlined">
                         search
