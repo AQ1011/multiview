@@ -1,5 +1,6 @@
 import next, { NextPage } from 'next'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
+import Categories from '../components/Categories/categories'
 import VideoItem from '../components/VideoItem/videoItem'
 import Item, { VideoSnippet } from '../models/item.interface'
 import { YtResponse } from '../models/youtube.model'
@@ -59,7 +60,10 @@ const Home: NextPageWithLayout = () => {
   }, [isInViewPort])
 
   return (
-    <>
+    <div >
+      <div style={{width: '100%', overflow: 'hidden'}}>
+        <Categories></Categories>
+      </div>
       <div className={styles['video-list']}>
         {list.map((n)=>
         <div key={n.id as string}>
@@ -74,7 +78,7 @@ const Home: NextPageWithLayout = () => {
         <Skeleton></Skeleton>
         <Skeleton></Skeleton>
       </div>
-    </>
+    </div>
   )
 }
 

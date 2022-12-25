@@ -9,12 +9,10 @@ export default async function handler(
   res: NextApiResponse
 ) {
     try {
-        let response = await fetch('https://www.googleapis.com/youtube/v3/videos?'
+        let response = await fetch('https://www.googleapis.com/youtube/v3/videoCategories?'
         + new URLSearchParams({
             part: 'snippet',
-            maxResults: '20',
-            chart: 'mostPopular',
-            pageToken: req.query['nextPageToken'] as string ?? "",
+            regionCode: 'vn',
             key: process.env.API_KEY!
         }));
         
@@ -27,13 +25,4 @@ export default async function handler(
     } catch (err) {
         res.status(500).send({success: false});
     }
-
-    // .then(response => {
-    //         return response.json()
-    // })
-    // .then(data => {
-    //     res.status(200).send(data);
-    // })
-    // .catch(err => {
-    // })
 }

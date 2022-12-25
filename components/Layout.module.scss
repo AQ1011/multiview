@@ -3,12 +3,11 @@
 
 
 .layout {
-    // max-width: 100vw;
     display: grid;
-    grid-template: 
+    grid-template-areas: 
         'header header header'
         'sidebar main main';
-    grid-template-columns: min-content min-content;
+    grid-template-columns: min-content 1fr;
     height: inherit;
     .header {
         grid-area: header;
@@ -32,8 +31,7 @@
         transition: width 0.3s ease-out, transform 0.3s ease-out;
     }
     .main {
-        width: 100%;
+        max-width: 100%;
         grid-area: main;
-        // flex-grow: 1;
     }
 }

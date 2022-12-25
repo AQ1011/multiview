@@ -17,7 +17,7 @@ export default function Video() {
     })
 
     return (
-        <div style={{width: '100%', padding: '1em'}}>
+        <div style={{width: '100%', height: '100%', padding: '1em'}}>
             <Player videoId={videoId}></Player>
             {/* <Player videoId={videoId}></Player> */}
             {/* <CommentList videoId={videoId}></CommentList> */}

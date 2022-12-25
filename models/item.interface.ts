@@ -40,3 +40,9 @@ export interface VideoSnippet {
     publishTime: Date;
     liveBroadcastContent: string;
 };
+
+export interface CategorySnippet {
+    title: string;
+    assignable: boolean;
+    channelId: string;
+}

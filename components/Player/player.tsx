@@ -18,6 +18,7 @@ export default function Player({videoId}: {videoId: string}) {
     const player = useRef<YouTubePlayer>();
     const container = useRef<HTMLDivElement>(null);
     const router = useRouter();
+    const [loaded, setLoaded] = useState(false);
 
     function onPlayerReady(event: YoutubePlayerEvent) {
         event.target.playVideo();
@@ -27,7 +28,7 @@ export default function Player({videoId}: {videoId: string}) {
         console.log(event);
     }
     useEffect(() => {
-        console.log('run');
+        setLoaded(false)
         window.onYouTubeIframeAPIReady = () => {
             player.current = new window.YT!.Player('player', {
                 width: '100%',
@@ -47,22 +48,28 @@ export default function Player({videoId}: {videoId: string}) {
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag!.parentNode!.insertBefore(tag, firstScriptTag);
+        setLoaded(true);
     },[]);
 
     useEffect(() => {
-        player.current = new window.YT!.Player('player', {
-            width: '100%',
-            height: '100%',
-            videoId: videoId,
-            playerVars: {
-                'playsinline': 1
-            },
-            events: {
-                'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange
-            }
-        });
-    }, [router, videoId])
+        if(!loaded) return;
+        try {
+            player.current = new window.YT!.Player('player', {
+                width: '100%',
+                height: '100%',
+                videoId: videoId,
+                playerVars: {
+                    'playsinline': 1
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        } catch (err) {
+
+        }
+    }, [router, videoId, loaded])
 
     return (
         <div className={styles['player-container']} ref={container}>
