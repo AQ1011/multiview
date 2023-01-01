@@ -1,0 +1,79 @@
+@use '../../styles/colors.scss' as color;
+@use '../../styles/const.scss' as c;
+
+.logo {
+    cursor: pointer;
+    font-weight: bold;
+    user-select: none;
+}
+
+.list {
+    display: flex;
+    gap: 16px;
+
+    li {
+        list-style-type: none;
+        cursor: pointer;
+        &[active] {
+            color: red;
+        }
+    }
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-height: c.$header-height;
+    height: c.$header-height;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: color.$surface;
+    color: #E4E2E2;
+    gap: 1em;
+}
+.part {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+.search {
+    display: flex;
+    align-items: center;
+    border-radius: 999px;
+    background: color.$surface-2;
+    padding-left: 1em;
+    gap: 1em;
+    width: 100%;
+    max-width: 30em;
+    input {
+        width: 100%;
+    }
+    button {
+        background: color.$primary-teritary !important;
+    }
+    &:focus-within {
+        outline: 1px solid color.$outline
+    }
+}
+.hide {
+    @media screen and (max-width: 800px) {
+        display: none;
+    }
+}
+.user-image {
+    position: relative;
+    height: 2em;
+    aspect-ratio: 1;
+    border-radius: 999px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: scale 0.3s ease;
+    &:hover {
+        scale: 1.2;
+    }
+}
