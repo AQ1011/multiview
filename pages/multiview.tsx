@@ -1,7 +1,7 @@
 import { useAtom } from "jotai";
 import { useState } from "react";
 import SearchPopUp from "../components/SearchPopUp/searchPopUp";
-import SmallPlayer from "../components/SmallPlayer/smallPlayer";
+import SmallPlayer from "../components/SmallPlayer/SmallPlayer";
 import { multiViewVideoIdsAtom } from "../store/store";
 import styles from '../styles/Multiview.module.scss';
 

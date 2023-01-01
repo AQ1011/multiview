@@ -8,7 +8,7 @@ interface props {
     click: any;
 }
 const SmallPlayer = ({videoId, click}: props) => {
-    const Player = dynamic(() => import('../Player/player'), {
+    const Player = dynamic(() => import('../Player/Player'), {
         ssr: false, 
     })
 

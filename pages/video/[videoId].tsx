@@ -4,15 +4,15 @@ import { useRouter } from "next/router"
 import Script from "next/script";
 import { useEffect, useMemo } from "react";
 import { YouTubePlayer } from "youtube-player/dist/types";
-import CommentList from "../../components/Comments/CommentList/commentList";
+import CommentList from "../../components/Comments/CommentList/CommentList";
 
 export default function Video() {
     const router = useRouter();
     const videoId = router.query['videoId'] as string;
-    const Player = dynamic(() => import('../../components/Player/player'), {
+    const Player = dynamic(() => import('../../components/Player/Player'), {
         ssr: false, 
     })
-    const CommentList = dynamic(() => import('../../components/Comments/CommentList/commentList'), {
+    const CommentList = dynamic(() => import('../../components/Comments/CommentList/CommentList'), {
         ssr: false,
     })
 

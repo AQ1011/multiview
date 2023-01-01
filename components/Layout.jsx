@@ -1,7 +1,7 @@
 import { NextComponentType } from "next";
 import { useEffect, useRef, useState } from "react";
 import Header from "./Header/Header";
-import SideMenu from "./SideMenu/sideMenu";
+import SideMenu from "./SideMenu/SideMenu";
 import styles from './Layout.module.scss';
 
 export default function Layout({ children }) {
