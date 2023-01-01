@@ -7,8 +7,8 @@ export default function Categories() {
     const [categoryList, setCategoryList] =  useState<Item<CategorySnippet>[]>([]);
     const list = useRef<HTMLUListElement>(null);
     let isDown = false;
-    let startX;
-    let scrollLeft;
+    let startX = 0;
+    let scrollLeft = 0;
     useEffect(() => {
         fetch('/api/categories').then((res) => {
             return res.json();
@@ -18,7 +18,7 @@ export default function Categories() {
         list.current?.addEventListener('mousedown', (e) => {
             isDown = true;
             startX = e.pageX - list.current!.offsetLeft;
-            scrollLeft = list.current?.scrollLeft;
+            scrollLeft = list.current!.scrollLeft;
         });
         list.current?.addEventListener('mouseleave', () => {
             isDown = false;
