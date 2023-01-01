@@ -7,7 +7,8 @@ import Item, { VideoSnippet } from "../../models/item.interface";
 import styles from './VideoItem.module.scss';
 
 interface Props extends Item<VideoSnippet> {
-    noRedirect: boolean
+    noRedirect?: boolean,
+    children?: any
 }
 
 const VideoItem = ({id, snippet , noRedirect}: Props) => {
