@@ -14,12 +14,12 @@ declare global {
     }
 }
 
-export default function Player({videoId}: {videoId: string}) {
+export default function Player({videoId, playerId}: {videoId: string, playerId?: string}) {
     const player = useRef<YouTubePlayer>();
     const container = useRef<HTMLDivElement>(null);
     const router = useRouter();
     const [loaded, setLoaded] = useState(false);
-
+    const playerName = playerId || 'player';
     function onPlayerReady(event: YoutubePlayerEvent) {
         event.target.playVideo();
     }
@@ -30,7 +30,7 @@ export default function Player({videoId}: {videoId: string}) {
     useEffect(() => {
         setLoaded(false)
         window.onYouTubeIframeAPIReady = () => {
-            player.current = new window.YT!.Player('player', {
+            player.current = new window.YT!.Player(playerName, {
                 width: '100%',
                 height: '100%',
                 videoId: videoId,
@@ -54,7 +54,7 @@ export default function Player({videoId}: {videoId: string}) {
     useEffect(() => {
         if(!loaded) return;
         try {
-            player.current = new window.YT!.Player('player', {
+            player.current = new window.YT!.Player(playerName, {
                 width: '100%',
                 height: '100%',
                 videoId: videoId,

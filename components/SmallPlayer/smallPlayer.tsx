@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import { useState } from 'react'
 import SearchPopUp from '../SearchPopUp/searchPopUp'
 import styles from './SmallPlayer.module.scss'
@@ -7,6 +8,9 @@ interface props {
     click: any;
 }
 const SmallPlayer = ({videoId, click}: props) => {
+    const Player = dynamic(() => import('../Player/player'), {
+        ssr: false, 
+    })
 
     if(!videoId)
     {
@@ -18,7 +22,10 @@ const SmallPlayer = ({videoId, click}: props) => {
         )
     }
     return (
-        <></>
+        <Player videoId={videoId}></Player>
+        // <>
+        // {videoId}
+        // </>
     )
 }
 export default SmallPlayer;
