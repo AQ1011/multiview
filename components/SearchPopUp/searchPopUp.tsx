@@ -4,7 +4,7 @@ import styles from './SearchPopUp.module.scss';
 import { multiViewVideoIdsAtom, searchQueryAtom } from '../../store/store';
 import Item, { VideoSnippet } from '../../models/item.interface';
 import { YtResponse } from '../../models/youtube.model';
-import VideoItem from '../VideoItem/videoItem';
+import VideoItem from '../VideoItem/VideoItem';
 import _ from 'lodash';
 
 export default function SearchPopUp ({open, setOpen, playerId}: {open: boolean, setOpen: any, playerId: number}) {

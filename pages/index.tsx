@@ -1,7 +1,7 @@
 import next, { NextPage } from 'next'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import Categories from '../components/Categories/categories'
-import VideoItem from '../components/VideoItem/videoItem'
+import VideoItem from '../components/VideoItem/VideoItem'
 import Item, { VideoSnippet } from '../models/item.interface'
 import { YtResponse } from '../models/youtube.model'
 import styles from '../styles/Home.module.scss'
