@@ -1,8 +1,5 @@
-import { NextComponentType, NextPageContext } from "next";
-import { BaseContext } from "next/dist/shared/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import Item, { VideoSnippet } from "../../models/item.interface";
 import styles from './VideoItem.module.scss';
 
@@ -11,7 +8,7 @@ interface Props extends Item<VideoSnippet> {
     children?: any
 }
 
-const VideoItem = ({id, snippet , noRedirect}: Props) => {
+export default function VideoItem ({id, snippet , noRedirect}: Props) {
     // let title = snippet.title;
     // if(title.length > 60) {
     //     title = title.substring(0, 80) + '...';
@@ -42,5 +39,3 @@ const VideoItem = ({id, snippet , noRedirect}: Props) => {
         </>
     )
 }
-
-export default VideoItem;
