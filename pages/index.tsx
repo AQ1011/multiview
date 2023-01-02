@@ -15,16 +15,7 @@ const Home: NextPageWithLayout = () => {
   const [nextPageToken, setNextPageToken] = useState('');
 
   const observer = useRef<IntersectionObserver>();
-  useEffect(() => {
-    if (loadElement.current && observer.current)
-      observer.current.observe(loadElement.current);
-
-    // return () => {
-    //   if (observer.current)
-    //     observer.current.disconnect();
-    // };
-  }, [loadElement, observer]);
-
+  
   function fetchPage(signal: AbortSignal, nextPage?: string) {
     try {
       fetch(`/api/home?` + new URLSearchParams({
@@ -32,8 +23,8 @@ const Home: NextPageWithLayout = () => {
       }), {signal}).then(res => {
         if (res.ok)
           return res.json();
-      }).then((data: YtResponse<VideoSnippet>) => {
-        setList([...list,...data.items]);
+        }).then((data: YtResponse<VideoSnippet>) => {
+          setList([...list,...data.items]);
         setNextPageToken(() => { 
           return data.nextPageToken;
         });
@@ -44,22 +35,34 @@ const Home: NextPageWithLayout = () => {
       }
     }
   }
+  
+  useEffect(() => {
+    if (loadElement.current && observer.current)
+      observer.current.observe(loadElement.current);
+
+    return () => {
+      if (observer.current)
+        observer.current.disconnect();
+    };
+  }, [loadElement, observer]);
 
   useEffect(() => {
       console.log('run 1')
       const controller = new AbortController();
-      fetchPage(controller.signal);
-      observer.current = new
-      IntersectionObserver(([entry]) => setIsInViewPort(entry.isIntersecting));
-  }, [])
+      if(isInViewPort)
+        fetchPage(controller.signal, nextPageToken);
+      observer.current = new IntersectionObserver(([entry]) => setIsInViewPort(entry.isIntersecting));
+  }, [isInViewPort])
 
   useEffect(() => {
     console.log('is in view port?');
     if(isInViewPort) {
       const controller = new AbortController();
       fetchPage(controller.signal, nextPageToken);
+      setIsInViewPort(false);
       // return () => controller.abort();
     }
+    console.log(isInViewPort);
   }, [isInViewPort])
 
   return (
