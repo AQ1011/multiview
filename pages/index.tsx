@@ -40,10 +40,10 @@ const Home: NextPageWithLayout = () => {
     if (loadElement.current && observer.current)
       observer.current.observe(loadElement.current);
 
-    return () => {
-      if (observer.current)
-        observer.current.disconnect();
-    };
+    // return () => {
+    //   if (observer.current)
+    //     observer.current.disconnect();
+    // };
   }, [loadElement, observer]);
 
   useEffect(() => {
