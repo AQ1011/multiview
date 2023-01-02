@@ -95,7 +95,7 @@ const Home: NextPageWithLayout = () => {
       <div className={styles['video-list']}>
         {list.map((n,index)=>
           <div key={index}>
-            <VideoItem {...n}></VideoItem>
+            <VideoItem {...n} noRedirect={false}></VideoItem>
           </div>
         )}
       </div>

@@ -13,6 +13,7 @@ export default function VideoItem ({id, snippet , noRedirect}: Props) {
     // if(title.length > 60) {
     //     title = title.substring(0, 80) + '...';
     // }
+    console.log(noRedirect);
     let player = 
     <div className={styles.container}>
         <div className={styles.thumbnail} data-live={snippet.liveBroadcastContent.localeCompare('live')}>
@@ -27,10 +28,10 @@ export default function VideoItem ({id, snippet , noRedirect}: Props) {
     </div>
 
     if(!noRedirect)
-    return (
-        <Link href={!noRedirect ? '' : `/video/${id}`}>
-            {player}
-        </Link>
+        return (
+            <Link href={`/video/${id}`}>
+                {player}
+            </Link>
     )
     else
     return(
