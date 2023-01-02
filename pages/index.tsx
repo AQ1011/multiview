@@ -25,8 +25,8 @@ const Home: NextPageWithLayout = () => {
         if (res.ok)
           return res.json();
         }).then((data: YtResponse<VideoSnippet>) => {
-          // setList([...list,...data.items]);
-          setList(data.items);
+          setList([...list,...data.items]);
+          // setList(data.items);
           setNextPageToken(() => { 
             return data.nextPageToken;
           });

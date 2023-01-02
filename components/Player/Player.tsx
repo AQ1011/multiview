@@ -71,6 +71,15 @@ export default function Player({videoId, playerId}: {videoId: string, playerId?:
         }
     }, [router, videoId, loaded])
 
+    if(!loaded) {
+        return (
+            <div className={styles.container}>
+                <div className={styles.loader}>
+
+                </div>
+            </div>
+        )
+    }
     return (
         <div className={styles['player-container']} ref={container}>
             <div id={playerName}>
