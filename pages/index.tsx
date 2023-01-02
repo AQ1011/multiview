@@ -50,7 +50,10 @@ const Home: NextPageWithLayout = () => {
       console.log('run 1')
       const controller = new AbortController();
       fetchPage(controller.signal, nextPageToken);
-      observer.current = new IntersectionObserver(([entry]) => setIsInViewPort(entry.isIntersecting),{ 
+      observer.current = new IntersectionObserver(([entry]) =>{ 
+        setIsInViewPort(entry.isIntersecting);
+        console.log('checking');
+      },{ 
         root: null, 
         rootMargin: '0px',
         threshold: 0.1
