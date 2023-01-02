@@ -1,4 +1,5 @@
 import { useAtom } from 'jotai';
+import { useAtomCallback } from 'jotai/utils'
 import { useCallback, useEffect, useRef, useState } from 'react';
 import styles from './SearchPopUp.module.scss';
 import { multiViewVideoIdsAtom, searchQueryAtom } from '../../store/store';
@@ -9,17 +10,18 @@ import _ from 'lodash';
 
 export default function SearchPopUp ({open, setOpen, playerId}: {open: boolean, setOpen: any, playerId: number}) {
     const backdrop = useRef(null);
-    const [searchQuery] = useAtom(searchQueryAtom);
+    const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
     const [videoList, setVideoList] = useState<Item<VideoSnippet>[]>([]);
     const [multiViewVideoIds, setMultiViewVideoIds] = useAtom(multiViewVideoIdsAtom);
 
 
-    const searchDebounce = useCallback(
-        _.debounce(() => {
-            console.log(searchQuery);
-            search(searchQuery);
-        },500)
-    , [searchQuery]);
+    const searchDebounce = useAtomCallback(
+        useCallback((get) => {
+                const query = get(searchQueryAtom);
+                console.log(query);
+                search(query);
+        }, [])
+    );
     function closePopUp(e: any) {
         if(e.target !== backdrop.current) {
             return;
@@ -46,6 +48,7 @@ export default function SearchPopUp ({open, setOpen, playerId}: {open: boolean, 
     }
     function onEnter(e: any) {
         if(e.key === "Enter") {
+            console.log('normal', searchQuery)
             searchDebounce();
         }
     }

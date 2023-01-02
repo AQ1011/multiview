@@ -5,6 +5,7 @@ import { ReactElement, ReactNode } from 'react';
 import Layout from '../components/Layout';
 import { SessionProvider } from "next-auth/react"
 import { Provider } from 'jotai';
+import { searchQueryAtom } from '../store/store';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
