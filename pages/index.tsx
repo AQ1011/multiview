@@ -54,8 +54,8 @@ const Home: NextPageWithLayout = () => {
   }, [])
 
   useEffect(() => {
+    console.log('is in view port?');
     if(isInViewPort) {
-      alert('in view port');
       const controller = new AbortController();
       fetchPage(controller.signal, nextPageToken);
       // return () => controller.abort();
