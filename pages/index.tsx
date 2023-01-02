@@ -52,7 +52,8 @@ const Home: NextPageWithLayout = () => {
       if(isInViewPort)
         fetchPage(controller.signal, nextPageToken);
       observer.current = new IntersectionObserver(([entry]) => setIsInViewPort(entry.isIntersecting));
-  }, [isInViewPort])
+      setIsInViewPort(true);
+  }, [])
 
   useEffect(() => {
     console.log('is in view port?');
