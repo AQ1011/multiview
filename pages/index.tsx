@@ -46,13 +46,16 @@ const Home: NextPageWithLayout = () => {
   }
 
   useEffect(() => {
-    const controller = new AbortController();
-    fetchPage(controller.signal);
-    observer.current = new IntersectionObserver(([entry]) => setIsInViewPort(entry.isIntersecting));
+      console.log('run 1')
+      const controller = new AbortController();
+      fetchPage(controller.signal);
+      observer.current = new
+      IntersectionObserver(([entry]) => setIsInViewPort(entry.isIntersecting));
   }, [])
 
   useEffect(() => {
     if(isInViewPort) {
+      alert('in view port');
       const controller = new AbortController();
       fetchPage(controller.signal, nextPageToken);
       // return () => controller.abort();
