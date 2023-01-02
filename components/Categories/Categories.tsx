@@ -3,7 +3,7 @@ import Item, { CategorySnippet } from "../../models/item.interface";
 import { YtResponse } from "../../models/youtube.model";
 import styles from './Categories.module.scss';
 
-export default function Categories() {
+export default function Categories({setCategory}: {setCategory: any}) {
     const [categoryList, setCategoryList] =  useState<Item<CategorySnippet>[]>([]);
     const list = useRef<HTMLUListElement>(null);
     let isDown = false;
@@ -35,17 +35,17 @@ export default function Categories() {
             console.log(walk);
         });
     }, [])
-    function pillClick() {
-        alert('not implement yet!!');
+    function pillClick(category: string) {
+        setCategory(category)
     }
     return (
         <ul ref={list} className={styles.list}>
             <li key={0}>
-                <button onClick={pillClick}>All</button>
+                <button onClick={() => pillClick('')}>All</button>
             </li>
             {categoryList.map((category, index) => {
                 return (
-                    <li key={index} onClick={pillClick}>
+                    <li key={index} onClick={() => pillClick(category.snippet.title)}>
                         <button>{category.snippet.title}</button>
                     </li>
                 )

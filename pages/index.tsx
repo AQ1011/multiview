@@ -13,6 +13,7 @@ const Home: NextPageWithLayout = () => {
   const loadElement = useRef<HTMLDivElement>(null);
   const [isInViewPort, setIsInViewPort] = useState(false);
   const [nextPageToken, setNextPageToken] = useState('');
+  const [category, setCategory] = useState('');
 
   const observer = useRef<IntersectionObserver>();
   
@@ -24,11 +25,12 @@ const Home: NextPageWithLayout = () => {
         if (res.ok)
           return res.json();
         }).then((data: YtResponse<VideoSnippet>) => {
-          setList([...list,...data.items]);
-        setNextPageToken(() => { 
-          return data.nextPageToken;
-        });
-      }).catch();
+          // setList([...list,...data.items]);
+          setList(data.items);
+          setNextPageToken(() => { 
+            return data.nextPageToken;
+          });
+        }).catch();
     } catch (err: any) {
       if (err.name === 'AbortError') {
         return;
@@ -45,9 +47,24 @@ const Home: NextPageWithLayout = () => {
     //     observer.current.disconnect();
     // };
   }, [loadElement, observer]);
-
   useEffect(() => {
-      console.log('run 1')
+    console.log(category);
+    if(category !== '')
+      search(category);
+    else {
+      const controller = new AbortController();
+      fetchPage(controller.signal, '');
+    }
+  }, [category])
+
+  function search(query: string) {
+    fetch('/api/search?' + new URLSearchParams({
+        q: query
+    })).then(res => res.json()).then((data: YtResponse<VideoSnippet>) => {
+        setList(data.items);
+    }).catch(err => console.log(err));
+  }
+  useEffect(() => {
       const controller = new AbortController();
       fetchPage(controller.signal, nextPageToken);
       observer.current = new IntersectionObserver(([entry]) =>{ 
@@ -73,13 +90,13 @@ const Home: NextPageWithLayout = () => {
   return (
     <div >
       <div style={{width: '100%', overflow: 'hidden'}}>
-        <Categories></Categories>
+        <Categories setCategory={setCategory}></Categories>
       </div>
       <div className={styles['video-list']}>
-        {list.map((n)=>
-        <div key={n.id as string}>
-          <VideoItem {...n}></VideoItem>
-        </div>
+        {list.map((n,index)=>
+          <div key={index}>
+            <VideoItem {...n}></VideoItem>
+          </div>
         )}
       </div>
       <div ref={loadElement} className={styles['video-list']}>
