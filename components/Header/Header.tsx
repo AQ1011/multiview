@@ -14,6 +14,25 @@ const Header= ({menu} : {menu: any}) => {
         setSearchQuery(e.target.value);
     }
 
+    function triggerEnter(e: any) {
+        var ev = new KeyboardEvent('keydown', {altKey:false,
+            bubbles: true,
+            cancelable: true,
+            charCode: 0,
+            code: "Enter",
+            composed: true,
+            ctrlKey: false,
+            detail: 0,
+            isComposing: false,
+            key: "Enter",
+            keyCode: 13,
+            location: 0,
+            metaKey: false,
+            repeat: false,
+            shiftKey: false,
+            which: 13});
+        window.dispatchEvent(ev);
+    }
     return(
         <header className={styles.header}>
             <div className={styles.part}>
@@ -26,7 +45,7 @@ const Header= ({menu} : {menu: any}) => {
             </div>
             <div className={styles.search}>
                 <input onChange={(e) => changeSearch(e)}/>
-                <button data-shape="icon">
+                <button data-shape="icon" onClick={triggerEnter}>
                     <span className="material-symbols-outlined">
                         search
                     </span>

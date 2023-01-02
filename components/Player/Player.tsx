@@ -73,7 +73,7 @@ export default function Player({videoId, playerId}: {videoId: string, playerId?:
 
     return (
         <div className={styles['player-container']} ref={container}>
-            <div id='player'>
+            <div id={playerName}>
                 
             </div>
         </div>

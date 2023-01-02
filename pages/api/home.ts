@@ -25,6 +25,7 @@ export default async function handler(
             throw new Error('Network error');
         }
     } catch (err) {
+        console.log(err);
         res.status(500).send({success: false});
     }
 

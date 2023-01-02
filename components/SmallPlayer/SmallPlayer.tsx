@@ -6,8 +6,9 @@ import styles from './SmallPlayer.module.scss'
 interface props {
     videoId?: string;
     click: any;
+    playerId: string;
 }
-const SmallPlayer = ({videoId, click}: props) => {
+const SmallPlayer = ({videoId, click, playerId}: props) => {
     const Player = dynamic(() => import('../Player/Player'), {
         ssr: false, 
     })
@@ -22,7 +23,7 @@ const SmallPlayer = ({videoId, click}: props) => {
         )
     }
     return (
-        <Player videoId={videoId}></Player>
+        <Player videoId={videoId} playerId={playerId}></Player>
         // <>
         // {videoId}
         // </>

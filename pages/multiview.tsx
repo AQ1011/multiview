@@ -18,10 +18,10 @@ export default function Multiview() {
     return (
         <>
             <div className={styles.container}>
-                <SmallPlayer click={() => open(0)} videoId={multiViewVideoIds[0]}></SmallPlayer>
-                <SmallPlayer click={() => open(1)} videoId={multiViewVideoIds[1]}></SmallPlayer>
-                <SmallPlayer click={() => open(2)} videoId={multiViewVideoIds[2]}></SmallPlayer>
-                <SmallPlayer click={() => open(3)} videoId={multiViewVideoIds[3]}></SmallPlayer>
+                <SmallPlayer click={() => open(0)} videoId={multiViewVideoIds[0]} playerId='player1'></SmallPlayer>
+                <SmallPlayer click={() => open(1)} videoId={multiViewVideoIds[1]} playerId='player2'></SmallPlayer>
+                <SmallPlayer click={() => open(2)} videoId={multiViewVideoIds[2]} playerId='player3'></SmallPlayer>
+                <SmallPlayer click={() => open(3)} videoId={multiViewVideoIds[3]} playerId='player4'></SmallPlayer>
             </div>
             <SearchPopUp open={openSearch} setOpen={setOpenSearch} playerId={clickedPlayer}></SearchPopUp>
         </>
