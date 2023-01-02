@@ -19,7 +19,7 @@ export default function SearchPopUp ({open, setOpen, playerId}: {open: boolean, 
             console.log(searchQuery);
             search(searchQuery);
         },500)
-    , []);
+    , [searchQuery]);
     function closePopUp(e: any) {
         if(e.target !== backdrop.current) {
             return;

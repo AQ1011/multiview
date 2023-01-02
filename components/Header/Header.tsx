@@ -11,6 +11,7 @@ const Header= ({menu} : {menu: any}) => {
     const { data: session, status } = useSession();
     const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
     function changeSearch(e: any) {
+        console.log(searchQuery);
         setSearchQuery(e.target.value);
     }
 
