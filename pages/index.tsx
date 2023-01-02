@@ -58,6 +58,7 @@ const Home: NextPageWithLayout = () => {
         rootMargin: '0px',
         threshold: 0.1
       });
+      console.log(observer);
   }, [])
 
   useEffect(() => {
